@@ -2,9 +2,10 @@ pipeline {
   agent any
   stages {
     stage('Compile') {
+      agent any
       steps {
         sh './gradlew compileJava'
-        echo 'Buzz'
+        echo 'Bees Buzz!'
       }
     }
 
@@ -42,7 +43,7 @@ pipeline {
     stage('Docker login') {
       steps {
         withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker-hub-credentials',
-                                       usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                                               usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
           sh "docker login --username $USERNAME --password $PASSWORD"
         }
 
